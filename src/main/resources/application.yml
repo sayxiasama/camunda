@@ -1,0 +1,30 @@
+
+server:
+    port: 8080
+    tomcat:
+        uri-encoding: UTF-8
+
+
+
+spring:
+    datasource:
+        url : jdbc:mysql://101.132.191.193/camunda?useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
+        username : root
+        password : 123456
+
+camunda:
+    bpm:
+        admin-user:
+            id: 357
+            password: 123456
+            firstName: admin
+        filter:
+            create: All tasks
+        auto-deployment-enabled: false
+        id-generator: strong
+        authorization:
+            tenant-check-enabled: false
+
+#logging:
+#    level:
+#        root: debug
