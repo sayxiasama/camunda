@@ -14,6 +14,5 @@ public class ProcessFailDelegate implements JavaDelegate {
         System.out.println("拒绝审批 - ");
 
         // do anything
-
     }
 }

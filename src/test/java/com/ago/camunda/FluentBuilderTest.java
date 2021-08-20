@@ -1,11 +1,9 @@
 package com.ago.camunda;
 
 
-import com.ago.camunda.biz.util.XMLHelper;
 import org.apache.commons.io.IOUtils;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RepositoryService;
-import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParse;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.repository.ProcessDefinitionQuery;
@@ -89,6 +87,10 @@ public class FluentBuilderTest {
     }
 
 
+    /**
+     * 输出bpmn
+     * @param definitionKey
+     */
     void convert(String definitionKey){
         //创建流程引擎配置类
         RepositoryService repositoryService = processEngine.getRepositoryService();

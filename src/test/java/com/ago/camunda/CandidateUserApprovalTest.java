@@ -1,6 +1,5 @@
 package com.ago.camunda;
 
-import com.ago.camunda.biz.ActSettingMapper;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
@@ -29,8 +28,6 @@ public class CandidateUserApprovalTest {
     @Autowired
     private ProcessEngine processEngine;
 
-    @Autowired
-    private ActSettingMapper actSettingMapper;
 
 
     @ParameterizedTest
@@ -80,18 +77,5 @@ public class CandidateUserApprovalTest {
 
 
         return deploy;
-    }
-
-
-    @Test
-    public void query(){
-
-
-        actSettingMapper.insertModel("b50769df-00c2-11ec-bc6e-c2d21dce0b69");
-
-
-        Map<String, Object> query = actSettingMapper.query();
-
-        System.out.println(query);
     }
 }

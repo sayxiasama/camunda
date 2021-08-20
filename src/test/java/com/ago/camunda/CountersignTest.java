@@ -77,7 +77,7 @@ public class CountersignTest {
 
         TaskService taskService = processEngine.getTaskService();
 
-        taskService.createTaskQuery().taskAssignee("Ame").list().forEach(task -> {
+        taskService.createTaskQuery().taskAssignee("ago").list().forEach(task -> {
 //        taskService.createTaskQuery().list().forEach(task ->{
             System.out.println("代办任务ID:"+task.getId());
 
@@ -99,10 +99,12 @@ public class CountersignTest {
      * @param taskId
      */
     @ParameterizedTest
-    @CsvSource({"92ad66e2-0094-11ec-a526-c2d21dce0b69"})
+    @CsvSource({"f2492983-015d-11ec-832c-c2d21dce0b69"})
     void complete(String taskId){
         TaskService taskService = processEngine.getTaskService();
-        processEngine.getTaskService().complete(taskId);
+        VariableMapImpl variableMap = new VariableMapImpl();
+        variableMap.put("formId","9527");
+        processEngine.getTaskService().complete(taskId , variableMap);
     }
 
     /**
