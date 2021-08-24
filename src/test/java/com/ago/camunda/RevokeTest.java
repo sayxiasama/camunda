@@ -1,5 +1,6 @@
 package com.ago.camunda;
 
+import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
@@ -16,7 +17,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class RevokeTest {
      */
     public void backProcess(String taskId, String activityId,
                             Map<String, Object> variables) throws Exception {
-        if (StringUtils.isEmpty(activityId)) {
+        if (org.apache.commons.lang3.StringUtils.isEmpty(activityId)) {
             throw new Exception("驳回目标节点ID为空！");
         }
 

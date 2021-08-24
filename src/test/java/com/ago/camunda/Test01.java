@@ -1,16 +1,27 @@
 package com.ago.camunda;
 
+import com.ago.camunda.biz.domain.WorkFlowProcessVariable;
+import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.engine.*;
+import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
 import org.camunda.bpm.engine.impl.RepositoryServiceImpl;
+import org.camunda.bpm.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
+import org.camunda.bpm.engine.impl.javax.el.ExpressionFactory;
+import org.camunda.bpm.engine.impl.javax.el.ValueExpression;
+import org.camunda.bpm.engine.impl.juel.ExpressionFactoryImpl;
+import org.camunda.bpm.engine.impl.juel.SimpleContext;
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity;
 import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.camunda.bpm.engine.impl.pvm.PvmActivity;
 import org.camunda.bpm.engine.impl.pvm.PvmTransition;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
 import org.camunda.bpm.engine.impl.pvm.process.TransitionImpl;
+import org.camunda.bpm.engine.impl.task.TaskDefinition;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.runtime.ActivityInstance;
+import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.variable.impl.VariableMapImpl;
@@ -39,6 +50,7 @@ public class Test01 {
 
     @Autowired
     private ManagementService managementService;
+
 
     private static final String USER_ID = "39";
 
@@ -263,4 +275,22 @@ public class Test01 {
         return null;
     }
 
+
+
+    @Test
+    public void objToMap() throws IllegalAccessException {
+
+        WorkFlowProcessVariable processVariable = new WorkFlowProcessVariable();
+
+        processVariable.setBusinessKey("111");
+        processVariable.setDeployId("33");
+        Map<String, Object> stringObjectMap = processVariable.toMap();
+
+
+        Map<String, Object> full = processVariable.fullToMap();
+
+        System.out.println(stringObjectMap);
+
+        System.out.println(full);
+    }
 }

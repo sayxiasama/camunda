@@ -3,6 +3,7 @@ package com.ago.camunda;
 import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.impl.identity.Authentication;
 import org.camunda.bpm.engine.repository.Deployment;
+import org.camunda.bpm.engine.repository.DeploymentBuilder;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.DelegationState;
@@ -42,33 +43,39 @@ public class CountersignTest {
         //静态部署
         RepositoryService repositoryService = processEngine.getRepositoryService();
 
-        Deployment deploy = repositoryService.createDeployment().addClasspathResource("leave.bpmn").name("会签测试").tenantId(TENANT_ONE).deploy();
+//        Deployment deploy = repositoryService.createDeployment()
+//                .addClasspathResource("leave.bpmn").name("会签测试").tenantId(TENANT_ONE).deploy();
+
+        DeploymentBuilder deploymentBuilder = repositoryService.createDeployment();
+
+        Deployment deploy = deploymentBuilder.addClasspathResource("leave.bpmn").name("会签测试").tenantId(TENANT_ONE).deploy();
+
 
         logger.info("流程部署Id : {} ", deploy.getId());
         logger.info("流程部署名称 : {} ", deploy.getName());
         logger.info("流程部署公司 : {} ", deploy.getTenantId());
 
 
-        //流程启动
-
-        RuntimeService runtimeService = processEngine.getRuntimeService();
-
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId()).tenantIdIn(TENANT_ONE).singleResult();
-
-        VariableMapImpl variableMap = new VariableMapImpl();
-
-        variableMap.put("primaryId","0827");
-        variableMap.put("userId","ago");
-        variableMap.put("approvalOne","lgd");
-        variableMap.put("approvalTwo","gh");
-
-        variableMap.put("tenant_id",TENANT_ONE);
-        variableMap.put("approvalList", Arrays.asList("Anna","Ame"));
-        variableMap.put("approval_list_two",Arrays.asList("lgd","gh"));
-
-        ProcessInstance processInstance = runtimeService.createProcessInstanceByKey(processDefinition.getKey()).processDefinitionTenantId(TENANT_ONE).setVariables(variableMap).execute();
-
-        logger.info("流程实例id ： {} " , processInstance.getId());
+//        //流程启动
+//
+//        RuntimeService runtimeService = processEngine.getRuntimeService();
+//
+//        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId()).tenantIdIn(TENANT_ONE).singleResult();
+//
+//        VariableMapImpl variableMap = new VariableMapImpl();
+//
+//        variableMap.put("primaryId","0827");
+//        variableMap.put("userId","ago");
+//        variableMap.put("approvalOne","lgd");
+//        variableMap.put("approvalTwo","gh");
+//
+//        variableMap.put("tenant_id",TENANT_ONE);
+//        variableMap.put("approvalList", Arrays.asList("Anna","Ame"));
+//        variableMap.put("approval_list_two",Arrays.asList("lgd","gh"));
+//
+//        ProcessInstance processInstance = runtimeService.createProcessInstanceByKey(processDefinition.getKey()).processDefinitionTenantId(TENANT_ONE).setVariables(variableMap).execute();
+//
+//        logger.info("流程实例id ： {} " , processInstance.getId());
 
     }
 

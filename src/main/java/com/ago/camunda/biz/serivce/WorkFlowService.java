@@ -1,8 +1,12 @@
 package com.ago.camunda.biz.serivce;
 
+import com.ago.camunda.biz.domain.CustomBPMNModelAttribute;
+import com.ago.camunda.biz.domain.WorkFlowEntity;
+import com.ago.camunda.biz.domain.WorkFlowProcessVariable;
 import org.camunda.bpm.engine.repository.Deployment;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 public interface WorkFlowService {
@@ -19,8 +23,10 @@ public interface WorkFlowService {
      */
     String deployInstance(InputStream is , String resourceName , String source , String name , String tenantId);
 
+    String deployInstance(WorkFlowEntity workFlowEntity);
+
     // 提交(开启一个流程实例).
-    void submit(String deployId ,String tenantId);
+    void submit(WorkFlowProcessVariable workFlowProcessVariable);
 
     // 审批.
     Map<String,Object> approval(Boolean result , String comment);
